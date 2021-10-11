@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang = "ua">
+<head>
+  <meta charset="utf-8">
+   <title>StudentTimeManager</title>
+   <link rel="shortcut icon" href="/clock.ico" type="image/x-icon">
+  <link rel="stylesheet" href="./css/calendar.css">
+  <link rel="stylesheet" href="./css/popup.css">
+  <link rel="stylesheet" href="./css/schedule.css">
+  <script src="main.js"></script>
+  <script>
+    function logout(){
+      document.cookie="key=0";
+      window.location.href = '/login';
+    }
+  </script>
+</head>
+<body>
+    <div class="tab">
+        <button class="tablinks active" onclick=
+        "openTab(event, 'tasks_for_today')">Розклад на сьогодні</button>
+        <button class="tablinks" onclick="openTab(event, 'calendar')">Календар</button>
+        <button class="tablinks" onclick="openTab(event, 'schedule')">Розклад занять</button>
+        <a class = "username" id="username">username</a>
+        <a class = "logout" onclick="logout();">Вихід</a>
+      </div>
+      <div id="tasks_for_today" class="tabcontent" style="display: block;">
+        <script src="tasks.js"></script>
+        <h2 class = "tasks_text" id="tasks_text"  ></h2>        
+      </div>
+      <div id="calendar" class="tabcontent">  
+        <div class = "month">
+          <div class = "controlPanel">  
+            <input type="number"class="input_year"id="input_year" onchange="generateMonth();" max="9999" min="1000">
+            <select class = "select_month" onchange='generateMonth();' id = "select_month">
+              <option value = "1">Січень</option>
+              <option value = "2">Лютий</option>
+              <option value = "3">Березень</option>
+              <option value = "4">Квітень</option>
+              <option value = "5">Травень</option>
+              <option value = "6">Червень</option>
+              <option value = "7">Липень</option>
+              <option value = "8">Серпень</option>
+              <option value = "9">Вересень</option>
+              <option value = "10">Жовтень</option>
+              <option value = "11">Листопад</option>
+              <option value = "12">Грудень</option>
+            </select>
+              <div class = "daysOfWeek_panel">
+                <script>
+                  let daysOfWeek=
+                  ["Понеділок","Вівторок","Середа","Четвер","П'ятниця","Субота","Неділя"];
+                  for(let i = 0; i < 7; i++){
+                    document.write(`<div class = "dayOfWeek" style="left:${(i)*12+16}vw;">${daysOfWeek[i]}</div>`); 
+                  }
+                </script>
+              </div>
+          </div>
+          <div id = "month_calendar">
+            <script src = "./calendar.js"></script>
+          </div>
+        </div>
+        <div class = "popUp">
+          <div class="darkness" id="darkness"onclick="close_messageBox()"></div>
+          <div class="messageBox" id="messageBox">
+            <h2 class = "popUp_date"id="popUp_date">date</h2>
+            <textarea class = "popUp_text"id="popUp_text"></textarea>
+            <button class="popUp_save"id="popUp_save"onclick="let t=document.getElementById('popUp_text').value; save_changes(t);">Зберегти зміни</button>
+            <button class="popUp_cancel"id="popUp_cancel"onclick="close_messageBox()">Скасування</button>
+          </div>
+        </div>
+      </div>      
+      <div id="schedule" class="tabcontent">
+        <script src="schedule.js"></script>
+        <button class="save_s" onclick="set_schedule()">Зберегти зміни</button>
+        <div class="dow">        
+          <b class="s">Понеділок</b>
+          <input type="text" class ="s_text" id="s_text_m">
+        </div>
+        <div class="dow">        
+          <b class="s">Вівторок</b>
+          <input type="text" class ="s_text" id="s_text_tue">
+        </div>
+        <div class="dow">        
+          <b class="s">Середа</b>
+          <input type="text" class ="s_text" id="s_text_w">
+        </div>
+        <div class="dow">        
+          <b class="s">Четвер</b>
+          <input type="text" class ="s_text" id="s_text_thi">
+        </div>
+        <div class="dow">        
+          <b class="s">П'ятниця</b>
+          <input type="text" class ="s_text" id="s_text_f">
+        </div>
+        <div class="dow">        
+          <b class="s">Субота</b>
+          <input type="text" class ="s_text" id="s_text_sat">
+        </div>
+        <div class="dow">        
+          <b class="s">Неділя</b>
+          <input type="text" class ="s_text" id="s_text_sun">
+        </div>
+        </div>
+      </div>      
+    <script src="tabs.js"></script>
+    <link rel="stylesheet" href="./css/style_main.css">
+</body>
+</html>
